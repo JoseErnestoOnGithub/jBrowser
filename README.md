@@ -1,25 +1,28 @@
-Split Browser
+jBrowser
 =============
 
-Split Browser is a minimalistic, ultra-lightweight, open source web browser for desktop, based on [WebKit](https://webkit.org/) (provided by [Playwright](https://playwright.dev/)), [Ultralight](https://ultralig.ht/) and a native [webview](https://webview.dev/) (WebKit on macOS, WebKitGTK on Linux, Edge WebView2 on Windows), with split screen (tiled) view, made with [Qt](https://www.qt.io/).
+<p align="center">
+  <img src="https://raw.githubusercontent.com/JoseErnestoOnGithub/curly-potato/main/Dtafalonso-Android-Lollipop-Browser.512.png" />
+</p>
 
-![Split Browser](https://i.ibb.co/rcXz8Yd/Split-Browser.webp)
+jBrowser is a mod of Split Browser that is a minimalistic, ultra-lightweight and open-source web browser for desktop, based on [WebKit](https://webkit.org/) (provided by [Playwright](https://playwright.dev/)), [Ultralight](https://ultralig.ht/) and a native [webview](https://webview.dev/) (WebKit on macOS, WebKitGTK on Linux, Microsoft Edge WebView2 on Windows), with split screen functionality. It was originally made with [Qt](https://www.qt.io/), but now it uses Qt (browser), Python (launcher) and HTML, CSS, JavaScript (documentation).
 
-Every variant of Split Browser (WebKit, Ultralight, native webview) uses <100 MB of RAM to show the home page, which is much less than Chrome/Firefox/Vivaldi/Opera/Edge. It also allows you to show web pages side-by-side as tiles by dragging and dropping tabs.
+
+Every variant of jBrowser (WebKit, Ultralight, native webview) uses <100 MB of RAM to show the home page, which is much less than Chrome/Firefox/Vivaldi/Opera/Edge. It also allows you to show web pages side-by-side as tiles by dragging and dropping tabs.
 
 See the RAM usage of all 3 variants showing the DuckDuckGo home page:
 
 ![Split Browser RAM usage](https://i.imgur.com/LbHUr1N.png)
 
-Split Browser is in the alpha stage and for now it provides only basic web browsing features - no bookmarks, no history, no extensions, no adblock, no advanced settings.
+Currently, jBrowser is in the alpha stage. Other features like bookmarks, history, extensions, adblock and advanced settings are not implemented.
 
 ## Download
 
-You can download the latest binary for Windows 10+ in the [releases](https://github.com/niutech/splitbrowser/releases). Keep in mind, this is an alpha version, so use at your own risk!
+You'll need to compile the binaries manually using Qt 5.14, MSVC 2017 and qmake.
 
 ## Build
 
-This project is being developed on Windows 10 using Qt 5.14, MSVC 2017 and qmake, but it also runs on Linux and macOS, provided that you have downloaded the lastest [WebKitGTK](https://webkitgtk.org/), [Ultralight SDK](https://github.com/ultralight-ux/Ultralight#eyes-getting-the-latest-sdk) or [Playwright WebKit binaries](https://github.com/microsoft/playwright) for your platform. Extract them to folders: `../ultralight` and `../webkit` relative to `splitbrowser`, open this project in Qt Creator, set the engine in `splitbrowser.pro` and run it.
+jBrowser is being developed on Windows 11 using Qt 5.14, MSVC 2017 and qmake. Still, it also runs on Linux and macOS, provided that you have downloaded the latest [WebKitGTK](https://webkitgtk.org/), [Ultralight SDK](https://github.com/ultralight-ux/Ultralight#eyes-getting-the-latest-sdk) or [Playwright WebKit binaries](https://github.com/microsoft/playwright) for your platform. Extract them to folders: `../ultralight` and `../webkit` relative to `splitbrowser`, open this project in Qt Creator, set the engine in `splitbrowser.pro` and run it.
 
 Here is Split Browser using WebKitGTK on Linux:
 
@@ -28,14 +31,22 @@ Here is Split Browser using WebKitGTK on Linux:
 
 ## Contribute
 
-Contributions are welcome!
+This is a fork. You won't be able to contribute in this repository.
 
 ## License
 
-Split Browser &copy; 2022 Jerzy Głowacki under MIT License.
+jBrowser is developed in the Public Domain.
 
 Ultralight &copy; 2022 Ultralight Inc. under [Ultralight Free License Agreement](https://github.com/ultralight-ux/Ultralight/blob/master/license/LICENSE.txt).
 
-Playwright &copy; 2022 Microsoft Corp. under Apache 2.0 License.
+Playwright &copy; 2022 Microsoft Corporation under Apache 2.0 License.
 
 Webview &copy; 2022 Serge Zaitsev et. al. under MIT license.
+
+Copyright &copy; 2010-2023 Freepik Company S.L. All rights reserved.
+
+&copy; 2023 IconArchive.com
+
+## Copyright?
+
+jBrowser is currently ineligible for copyright, meaning that copyright cannot be applied to the browser. This forces me to develop the mod in the Public Domain, with no signs of copyright eligibility.
