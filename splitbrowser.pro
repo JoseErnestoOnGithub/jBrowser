@@ -1,5 +1,5 @@
 DEVELOPER_NAME='Jerzy Glowacki'
-APP_NAME='Split Browser'
+APP_NAME='jBrowser'
 APP_VERSION=0.2
 WEBKIT_VERSION = 1728
 WEB_ENGINE = native # webkit/native/ultralight
