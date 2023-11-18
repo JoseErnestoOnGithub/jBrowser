@@ -16,6 +16,8 @@
 ** License along with this library; If not, see <http://www.gnu.org/licenses/>.
 ******************************************************************************/
 
+/* This file has been modified for use in jBrowser. */
+
 
 //============================================================================
 /// \file   DockAreaTitleBar.cpp
