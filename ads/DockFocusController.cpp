@@ -1,3 +1,5 @@
+/* This file has been modified for use in jBrowser. */
+
 //============================================================================
 /// \file   DockFocusController.cpp
 /// \author Uwe Kindler
@@ -168,7 +170,7 @@ void DockFocusControllerPrivate::updateDockWidgetFocus(CDockWidget* DockWidget)
 
 
 #ifdef Q_OS_LINUX
-	// This code is required for styling the floating widget titlebar for linux
+	// This code is required for styling the floating widget title bar for Linux
 	// depending on the current focus state
 	if (FloatingWidget != NewFloatingWidget)
 	{
