@@ -31,6 +31,8 @@
 **
 ****************************************************************************/
 
+/* This file has been modified for use in jBrowser. */
+
 #include "searchlineedit.h"
 
 #include <QtGui/QPainter>
@@ -78,8 +80,8 @@ void ClearButton::textChanged(const QString &text)
 }
 
 /*
-    Search icon on the left hand side of the search widget
-    When a menu is set a down arrow appears
+    search icon on the left-hand side of the search widget
+    when a menu is set, a down arrow appears
  */
 class SearchButton : public QAbstractButton {
 public:
@@ -153,9 +155,9 @@ void SearchButton::paintEvent(QPaintEvent *event)
 
 /*
     SearchLineEdit is an enhanced QLineEdit
-    - A Search icon on the left with optional menu
-    - When there is no text and doesn't have focus an "inactive text" is displayed
-    - When there is text a clear button is displayed on the right hand side
+    - a search icon on the left with optional menu
+    - when there is no text and doesn't have focus an "inactive text" is displayed
+    - when there is text a clear button is displayed on the right hand side
  */
 SearchLineEdit::SearchLineEdit(QWidget *parent) : QLineEdit(parent),
     m_searchButton(new SearchButton(this))
@@ -163,6 +165,7 @@ SearchLineEdit::SearchLineEdit(QWidget *parent) : QLineEdit(parent),
 //    connect(lineEdit(), SIGNAL(textChanged(QString)),
 //            this, SIGNAL(textChanged(QString)));
 //    setLeftWidget(m_searchButton);
+  // won't be used
     m_inactiveText = tr("Search");
 
     QSizePolicy policy = sizePolicy();
@@ -173,6 +176,7 @@ void SearchLineEdit::paintEvent(QPaintEvent *event)
 {
     if (text().isEmpty() && !hasFocus() && !m_inactiveText.isEmpty()) {
 //        ExLineEdit::paintEvent(event);
+      // never used
         QStyleOptionFrameV2 panel;
         initStyleOption(&panel);
         QRect r = style()->subElementRect(QStyle::SE_LineEditContents, &panel, this);
