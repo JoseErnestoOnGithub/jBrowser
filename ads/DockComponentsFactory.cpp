@@ -1,9 +1,12 @@
+/* This file has been modified for use in jBrowser. */
+
 //============================================================================
 /// \file   DockComponentsFactory.cpp
 /// \author Uwe Kindler
 /// \date   10.02.2020
 /// \brief  Implementation of DockComponentsFactory
 //============================================================================
+
 
 //============================================================================
 //                                   INCLUDES
@@ -63,7 +66,7 @@ void CDockComponentsFactory::resetDefaultFactory()
 {
 	DefaultFactory.reset(new CDockComponentsFactory());
 }
-} // namespace ads
+} // Namespace ads
 
 //---------------------------------------------------------------------------
 // EOF DockComponentsFactory.cpp
