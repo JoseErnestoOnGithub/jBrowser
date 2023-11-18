@@ -1,3 +1,5 @@
+/* This file has been modified for use in jBrowser. */
+
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "DockAreaWidget.h"
@@ -501,5 +503,5 @@ void MainWindow::onAddBookmark()
 
 void MainWindow::save()
 {
-    // TODO
+    // i'll implement this later
 }
