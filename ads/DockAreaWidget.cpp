@@ -16,6 +16,7 @@
 ** License along with this library; If not, see <http://www.gnu.org/licenses/>.
 ******************************************************************************/
 
+/* This file has been modified for use in jBrowser. */
 
 //============================================================================
 /// \file   DockAreaWidget.cpp
@@ -65,7 +66,7 @@ static const char* const ACTION_PROPERTY = "action";
  * Internal dock area layout mimics stack layout but only inserts the current
  * widget into the internal QLayout object.
  * \warning Only the current widget has a parent. All other widgets
- * do not have a parent. That means, a widget that is in this layout may
+ * do not have a parent. That means a widget that is in this layout may
  * return nullptr for its parent() function if it is not the current widget.
  */
 class CDockAreaLayout
@@ -150,7 +151,7 @@ public:
 	}
 
 	/**
-	 * Activates the widget with the give index.
+	 * Activates the widget with the given index.
 	 */
 	void setCurrentIndex(int index)
 	{
@@ -306,7 +307,7 @@ struct DockAreaWidgetPrivate
 	}
 
 	/**
-	 * Udpates the enable state of the close and detach button
+	 * Updates the enable state of the close and detach button
 	 */
 	void updateTitleBarButtonStates();
 
