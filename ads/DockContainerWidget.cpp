@@ -16,6 +16,7 @@
 ** License along with this library; If not, see <http://www.gnu.org/licenses/>.
 ******************************************************************************/
 
+/* This file has been modified for use in jBrowser. */
 
 //============================================================================
 /// \file   DockContainerWidget.cpp
@@ -150,7 +151,7 @@ public:
 	CDockAreaWidget* addDockWidgetToContainer(DockWidgetArea area, CDockWidget* Dockwidget);
 
 	/**
-	 * Adds dock widget to a existing DockWidgetArea
+	 * Adds dock widget to an existing DockWidgetArea
 	 */
 	CDockAreaWidget* addDockWidgetToDockArea(DockWidgetArea area, CDockWidget* Dockwidget,
 		CDockAreaWidget* TargetDockArea);
@@ -161,25 +162,25 @@ public:
 	void addDockArea(CDockAreaWidget* NewDockWidget, DockWidgetArea area = CenterDockWidgetArea);
 
 	/**
-	 * Drop floating widget into container
+	 * Drop floating widget into the container
 	 */
 	void dropIntoContainer(CFloatingDockContainer* FloatingWidget, DockWidgetArea area);
 
 	/**
-	 * Drop floating widget into dock area
+	 * Drop floating widget into the dock area
 	 */
 	void dropIntoSection(CFloatingDockContainer* FloatingWidget,
 		CDockAreaWidget* TargetArea, DockWidgetArea area);
 
 	/**
-	 * Moves the dock widget or dock area given in Widget parameter to a
+	 * Moves the dock widget or dock area given in the Widget parameter to a
 	 * new dock widget area
 	 */
 	void moveToNewSection(QWidget* Widget, CDockAreaWidget* TargetArea, DockWidgetArea area);
 
 	/**
-	 * Moves the dock widget or dock area given in Widget parameter to a
-	 * a dock area in container
+	 * Moves the dock widget or dock area given in the Widget parameter to a
+	 * a dock area in the container
 	 */
 	void moveToContainer(QWidget* Widgett, DockWidgetArea area);
 
@@ -207,17 +208,17 @@ public:
 	void appendDockAreas(const QList<CDockAreaWidget*> NewDockAreas);
 
 	/**
-	 * Save state of child nodes
+	 * Save the state of child nodes
 	 */
 	void saveChildNodesState(QXmlStreamWriter& Stream, QWidget* Widget);
 
 	/**
-	 * Restore state of child nodes.
+	 * Restore the state of child nodes.
 	 * \param[in] Stream The data stream that contains the serialized state
 	 * \param[out] CreatedWidget The widget created from parsed data or 0 if
 	 * the parsed widget was an empty splitter
 	 * \param[in] Testing If Testing is true, only the stream data is
-	 * parsed without modifiying anything.
+	 * parsed without modifying anything.
 	 */
 	bool restoreChildNodes(CDockingStateReader& Stream, QWidget*& CreatedWidget,
 		bool Testing);
@@ -269,14 +270,14 @@ public:
 	 */
 	int& visibleDockAreaCount()
 	{
-		// Lazy initialisation - we initialize the VisibleDockAreaCount variable
+		// Lazy initialization - we initialize the VisibleDockAreaCount variable
 		// on first use
 		initVisibleDockAreaCount();
 		return VisibleDockAreaCount;
 	}
 
 	/**
-	 * The visible dock area count changes, if dock areas are remove, added or
+	 * The visible dock area count changes, if dock areas are removed, added or
 	 * when its view is toggled
 	 */
 	void onVisibleDockAreaCountChanged();
@@ -305,7 +306,7 @@ public:
 	}
 
 	/**
-	 * Ensures equal distribution of the sizes of a splitter if an dock widget
+	 * Ensures equal distribution of the sizes of a splitter if a dock widget
 	 * is inserted from code
 	 */
 	void adjustSplitterSizesOnInsertion(QSplitter* Splitter, qreal LastRatio = 1.0)
@@ -323,8 +324,8 @@ public:
 	}
 
     /**
-     * This function forces the dock container widget to update handles of splitters
-     * based if a central widget exists.
+     * This function forces the dock container widget to update the handles of splitters
+     * based on a central widget exists.
      */
     void updateSplitterHandles(QSplitter* splitter);
 
@@ -463,7 +464,7 @@ void DockContainerWidgetPrivate::dropIntoContainer(CFloatingDockContainer* Float
 	addDockAreasToList(NewDockAreas);
 
 	// If we dropped the floating widget into the main dock container that does
-	// not contain any dock widgets, then splitter is invisible and we need to
+	// not contain any dock widgets, then the splitter is invisible and we need to
 	// show it to display the docked widgets
 	if (!Splitter->isVisible())
 	{
@@ -512,7 +513,7 @@ void DockContainerWidgetPrivate::dropIntoCenterOfSection(
 void DockContainerWidgetPrivate::dropIntoSection(CFloatingDockContainer* FloatingWidget,
 		CDockAreaWidget* TargetArea, DockWidgetArea area)
 {
-	// Dropping into center means all dock widgets in the dropped floating
+	// Dropping into the center means all dock widgets in the dropped floating
 	// widget will become tabs of the drop area
 	if (CenterDockWidgetArea == area)
 	{
@@ -588,7 +589,7 @@ void DockContainerWidgetPrivate::dropIntoSection(CFloatingDockContainer* Floatin
         }
 
 		// Save the sizes before insertion and restore it later to prevent
-		// shrinking of existing area
+		// shrinking of the existing area
 		auto Sizes = TargetAreaSplitter->sizes();
 		insertWidgetIntoSplitter(NewSplitter, TargetArea, !InsertParam.append());
         updateSplitterHandles(NewSplitter);
@@ -649,7 +650,7 @@ void DockContainerWidgetPrivate::moveIntoCenterOfSection(QWidget* Widget, CDockA
 //============================================================================
 void DockContainerWidgetPrivate::moveToNewSection(QWidget* Widget, CDockAreaWidget* TargetArea, DockWidgetArea area)
 {
-	// Dropping into center means all dock widgets in the dropped floating
+	// Dropping into the center means all dock widgets in the dropped floating
 	// widget will become tabs of the drop area
 	if (CenterDockWidgetArea == area)
 	{
@@ -768,9 +769,9 @@ void DockContainerWidgetPrivate::moveToContainer(QWidget* Widget, DockWidgetArea
 	}
 	else
 	{
-		// We check, if we insert the dropped widget into the same place that
-		// it already has and do nothing, if it is the same place. It would
-		// also work without this check, but it looks nicer with the check
+		// We check if we insert the dropped widget into the same place that
+		// it already has and does nothing, if it is in the same place. It would
+		// also works without this check, but it looks nicer with the check
 		// because there will be no layout updates
 		auto Splitter = internal::findParent<CDockSplitter*>(DroppedDockArea);
 		auto InsertParam = internal::dockAreaInsertParameters(area);
@@ -810,7 +811,7 @@ void DockContainerWidgetPrivate::addDockAreasToList(const QList<CDockAreaWidget*
 	}
 
 	// We need to ensure, that the dock area title bar is visible. The title bar
-	// is invisible, if the dock are is a single dock area in a floating widget.
+	// is invisible, if the dock area is a single dock area in a floating widget.
 	if (1 == CountBefore)
 	{
 		DockAreas.at(0)->updateTitleBarVisibility();
@@ -1102,7 +1103,7 @@ bool DockContainerWidgetPrivate::restoreChildNodes(CDockingStateReader& s,
 		else
 		{
 			s.skipCurrentElement();
-            ADS_PRINT("Unknown element");
+            ADS_PRINT("Unrecognized element");
 		}
 	}
 
