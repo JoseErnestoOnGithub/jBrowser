@@ -41,7 +41,7 @@
 #include <QtDebug>
 
 #define AUTOSAVE_IN  1000 * 3  // seconds
-#define MAXWAIT      1000 * 15 // seconds
+#define MAXWAIT      5 * 3600 // seconds
 
 AutoSaver::AutoSaver(QObject *parent) : QObject(parent)
 {
