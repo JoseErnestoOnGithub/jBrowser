@@ -31,6 +31,8 @@
 **
 ****************************************************************************/
 
+/* This file has been modified for use in jBrowser. */
+
 #include "history.h"
 #include "mainwindow.h"
 #include "autosaver.h"
@@ -101,7 +103,7 @@ void HistoryManager::setHistory(const QList<HistoryItem> &history, bool loadedAn
 {
     m_history = history;
 
-    // verify that it is sorted by date
+    // checks that it is sorted by date
     if (!loadedAndSorted)
         std::sort(m_history.begin(), m_history.end());
 
@@ -143,8 +145,8 @@ void HistoryManager::checkForExpired()
         QDateTime checkForExpired = m_history.last().dateTime;
         checkForExpired.setDate(checkForExpired.date().addDays(m_historyLimit));
         if (now.daysTo(checkForExpired) > 7) {
-            // check at most in a week to prevent int overflows on the timer
-            nextTimeout = 7 * 86400;
+            // check at most in 2 weeks to prevent int overflows on the timer
+            nextTimeout = 1209600;
         } else {
             nextTimeout = now.secsTo(checkForExpired);
         }
@@ -164,6 +166,7 @@ void HistoryManager::addHistoryItem(const HistoryItem &item)
 {
 //    if (globalSettings->testAttribute(Settings::PrivateBrowsingEnabled))
 //        return;
+    // that piece of code shouldn't be used, so i kept this comment thingy
 
     m_history.prepend(item);
     emit entryAdded(item);
@@ -225,13 +228,13 @@ void HistoryManager::load()
     if (!historyFile.exists())
         return;
     if (!historyFile.open(QFile::ReadOnly)) {
-        qWarning() << "Unable to open history file" << historyFile.fileName();
+        qWarning() << "History: Can't open history file" << historyFile.fileName();
         return;
     }
 
     QList<HistoryItem> list;
     QDataStream in(&historyFile);
-    // Double check that the history file is sorted as it is read in
+    // tries to double-check that the history file is sorted as it is read in
     bool needToSort = false;
     HistoryItem lastInsertedItem;
     QByteArray data;
@@ -272,7 +275,7 @@ void HistoryManager::load()
 
     setHistory(list, true);
 
-    // If we had to sort re-write the whole history sorted
+    // if we had to sort, re-write the whole history sorted
     if (needToSort) {
         m_lastSavedUrl = QString();
         m_saveTimer->changeOccurred();
@@ -308,7 +311,7 @@ void HistoryManager::save()
     }
 
     QFile historyFile(directory + QLatin1String("/history"));
-    // When saving everything use a temporary file to prevent possible data loss.
+    // when saving everything, use a temporary file to prevent possible loss of data (wikipedia has an article of it, i guess)
     QTemporaryFile tempFile;
     tempFile.setAutoRemove(false);
     bool open = false;
@@ -319,7 +322,7 @@ void HistoryManager::save()
     }
 
     if (!open) {
-        qWarning() << "Unable to open history file for saving"
+        qWarning() << "History: The history file couldn't be opened for saving."
                    << (saveAll ? tempFile.fileName() : historyFile.fileName());
         return;
     }
@@ -336,9 +339,9 @@ void HistoryManager::save()
 
     if (saveAll) {
         if (historyFile.exists() && !historyFile.remove())
-            qWarning() << "History: error removing old history." << historyFile.errorString();
+            qWarning() << "History: Unable to remove old history" << historyFile.errorString();
         if (!tempFile.rename(historyFile.fileName()))
-            qWarning() << "History: error moving new history over old." << tempFile.errorString() << historyFile.fileName();
+            qWarning() << "History: Unable to move new history over old" << tempFile.errorString() << historyFile.fileName();
     }
     m_lastSavedUrl = m_history.value(0).url;
 }
@@ -458,7 +461,7 @@ bool HistoryModel::removeRows(int row, int count, const QModelIndex &parent)
 #define MOVEDROWS 15
 
 /*
-    Maps the first bunch of items of the source model to the root
+    maps the first bunch of items of the source model to the root
 */
 HistoryMenuModel::HistoryMenuModel(HistoryTreeModel *sourceModel, QObject *parent)
     : QAbstractProxyModel(parent)
@@ -754,6 +757,7 @@ void HistoryFilterModel::setSourceModel(QAbstractItemModel *newSourceModel)
 //                this, SLOT(sourceRowsInserted(QModelIndex,int,int)));
 //        connect(sourceModel(), SIGNAL(rowsRemoved(QModelIndex,int,int)),
 //                this, SLOT(sourceRowsRemoved(QModelIndex,int,int)));
+        // this code won't be used
     }
 }
 
@@ -801,10 +805,10 @@ QModelIndex HistoryFilterModel::mapFromSource(const QModelIndex &sourceIndex) co
     if (!m_historyHash.contains(url))
         return QModelIndex();
 
-    // This can be done in a binary search, but we can't use qBinary find
+    // this can be done in a binary search, but, um... we can't use qBinary find
     // because it can't take: qBinaryFind(m_sourceRow.end(), m_sourceRow.begin(), v);
-    // so if this is a performance bottlneck then convert to binary search, until then
-    // the cleaner/easier to read code wins the day.
+    // so if this is a performance bottleneck then convert to binary search, until then
+    // the cleaner/easier-to-read code wins the day
     int realRow = -1;
     int sourceModelRow = sourceModel()->rowCount() - sourceIndex.row();
 
@@ -883,8 +887,8 @@ void HistoryFilterModel::sourceRowsRemoved(const QModelIndex &, int start, int e
 }
 
 /*
-    Removing a continuous block of rows will remove filtered rows too as this is
-    the users intention.
+    removing a continuous block of rows will remove filtered rows too as this is
+    the user's intention
 */
 bool HistoryFilterModel::removeRows(int row, int count, const QModelIndex &parent)
 {
@@ -1079,7 +1083,7 @@ int HistoryTreeModel::rowCount(const QModelIndex &parent) const
     return (end - start);
 }
 
-// Translate the top level date row into the offset where that date starts
+// translate the top-level date row into the offset where that date starts
 int HistoryTreeModel::sourceDateRow(int row) const
 {
     if (row <= 0)
@@ -1196,7 +1200,7 @@ void HistoryTreeModel::sourceReset()
 
 void HistoryTreeModel::sourceRowsInserted(const QModelIndex &parent, int start, int end)
 {
-    Q_UNUSED(parent); // Avoid warnings when compiling release
+    Q_UNUSED(parent); // avoid warnings when compiling release
     Q_ASSERT(!parent.isValid());
     if (start != 0 || start != end) {
         beginResetModel();
@@ -1236,7 +1240,7 @@ QModelIndex HistoryTreeModel::mapFromSource(const QModelIndex &sourceIndex) cons
 
 void HistoryTreeModel::sourceRowsRemoved(const QModelIndex &parent, int start, int end)
 {
-    Q_UNUSED(parent); // Avoid warnings when compiling release
+    Q_UNUSED(parent); // avoid warnings when compiling release
     Q_ASSERT(!parent.isValid());
     if (m_sourceRowCache.isEmpty())
         return;
@@ -1256,7 +1260,7 @@ void HistoryTreeModel::sourceRowsRemoved(const QModelIndex &parent, int start, i
         int row = qMax(0, it - m_sourceRowCache.begin());
         int offset = m_sourceRowCache[row];
         QModelIndex dateParent = index(row, 0);
-        // If we can remove all the rows in the date do that and skip over them
+        // if we can remove all the rows in the date do that and skip over them
         int rc = rowCount(dateParent);
         if (i - rc + 1 == offset && start <= i - rc + 1) {
             beginRemoveRows(QModelIndex(), row, row);
