@@ -16,6 +16,7 @@
 ** License along with this library; If not, see <http://www.gnu.org/licenses/>.
 ******************************************************************************/
 
+/* This file has been modified for use in jBrowser. */
 
 //============================================================================
 /// \file   DockManager.cpp
@@ -395,7 +396,7 @@ void DockManagerPrivate::restoreDockAreasIndices()
 void DockManagerPrivate::emitTopLevelEvents()
 {
     // Finally we need to send the topLevelChanged() signals for all dock
-    // widgets if top level changed
+    // widgets if top-level changed
     for (auto DockContainer : Containers)
     {
     	CDockWidget* TopLevelDockWidget = DockContainer->topLevelDockWidget();
@@ -424,7 +425,7 @@ bool DockManagerPrivate::restoreState(const QByteArray& State, int version)
 	QByteArray state = State.startsWith("<?xml") ? State : qUncompress(State);
     if (!checkFormat(state, version))
     {
-        ADS_PRINT("checkFormat: Error checking format!!!!!!!");
+        ADS_PRINT("checkFormat: Error checking format");
     	return false;
     }
 
@@ -434,7 +435,7 @@ bool DockManagerPrivate::restoreState(const QByteArray& State, int version)
 
     if (!restoreStateFromXml(state, version))
     {
-        ADS_PRINT("restoreState: Error restoring state!!!!!!!");
+        ADS_PRINT("restoreState: Error restoring state");
     	return false;
     }
 
@@ -532,10 +533,10 @@ CDockManager::~CDockManager()
 #ifdef Q_OS_LINUX
 bool CDockManager::eventFilter(QObject *obj, QEvent *e)
 {
-	// Emulate Qt:Tool behaviour.
+	// Emulate Qt:Tool behavior.
 	// Required because on some WMs Tool windows can't be maximized.
 
-	// Window always on top of the MainWindow.
+	// Window is always on top of the MainWindow.
 	if (e->type() == QEvent::WindowActivate)
 	{
 		for (auto _window : floatingWidgets())
@@ -544,9 +545,9 @@ bool CDockManager::eventFilter(QObject *obj, QEvent *e)
 			{
 				continue;
 			}
-			// setWindowFlags(Qt::WindowStaysOnTopHint) will hide the window and thus requires a show call.
-			// This then leads to flickering and a nasty endless loop (also buggy behaviour on Ubuntu).
-			// So we just do it ourself.
+			// setWindowFlags(Qt::WindowStaysOnTopHint) will hide the window and thus require a show call.
+			// This then leads to flickering and a nasty endless loop (also buggy behavior on Ubuntu).
+			// So we just do it ourselves.
             if(QGuiApplication::platformName() == QLatin1String("xcb"))
 			{
 				internal::xcb_update_prop(true, _window->window()->winId(),
@@ -720,7 +721,7 @@ bool CDockManager::restoreState(const QByteArray &state, int version)
 	// which in turn  means, that each time a widget is removed the stack
 	// will show and raise the next available widget which in turn
 	// triggers show events for the dock widgets. To avoid this we hide the
-	// dock manager. Because there will be no processing of application
+	// dock manager. Because there will be no processing of the application
 	// events until this function is finished, the user will not see this
 	// hiding
 	bool IsHidden = this->isHidden();
@@ -805,10 +806,10 @@ void CDockManager::restoreHiddenFloatingWidgets()
 	{
 		bool hasDockWidgetVisible = false;
 
-		// Needed to prevent CFloatingDockContainer being shown empty
+		// Needed to prevent CFloatingDockContainer from being shown as empty
 		// Could make sense to move this to CFloatingDockContainer::showEvent(QShowEvent *event)
-		// if experiencing CFloatingDockContainer being shown empty in other situations, but let's keep
-		// it here for now to make sure changes to fix Issue #380 does not impact existing behaviours
+		// if experiencing CFloatingDockContainer being shown empty in other situations, let's keep
+		// it here, for now, to make sure changes to fix issue #380 do not impact existing behaviors
 		for (auto dockWidget : FloatingWidget->dockWidgets())
 		{
 			if (dockWidget->toggleViewAction()->isChecked())
@@ -1016,7 +1017,7 @@ CDockAreaWidget* CDockManager::setCentralWidget(CDockWidget* widget)
 	// widget or if there are already other dock widgets
 	if (d->CentralWidget)
 	{
-		qWarning("Setting a central widget not possible because there is already a central widget.");
+		qWarning("Setting a central widget is not possible because there is already a central widget.");
 		return nullptr;
 	}
 
@@ -1024,7 +1025,7 @@ CDockAreaWidget* CDockManager::setCentralWidget(CDockWidget* widget)
 	// dock widgets.
 	if (!d->DockWidgetsMap.isEmpty())
 	{
-		qWarning("Setting a central widget not possible - the central widget need to be the first "
+		qWarning("Setting a central widget is not possible - the central widget need to be the first "
 			"dock widget that is added to the dock manager.");
 		return nullptr;
 	}
