@@ -50,8 +50,8 @@
 #include <QtCore/QDebug>
 #include <QCoreApplication>
 
-#define BOOKMARKBAR "Bookmarks Bar"
-#define BOOKMARKMENU "Bookmarks Menu"
+#define BOOKMARKBAR "Bookmarks bar"
+#define BOOKMARKMENU "Bookmarks menu"
 
 BookmarksManager::BookmarksManager(QObject *parent)
     : QObject(parent)
@@ -92,7 +92,7 @@ void BookmarksManager::load()
     XbelReader reader;
     m_bookmarkRootNode = reader.read(bookmarkFile);
     if (reader.error() != QXmlStreamReader::NoError) {
-        QMessageBox::warning(0, QLatin1String("Loading Bookmark"),
+        QMessageBox::warning(0, QLatin1String("Loading bookmark..."),
             tr("Error when loading bookmarks on line %1, column %2:\n"
                "%3").arg(reader.lineNumber()).arg(reader.columnNumber()).arg(reader.errorString()));
     }
@@ -151,7 +151,7 @@ void BookmarksManager::save() const
     QString dir = QStandardPaths::writableLocation(QStandardPaths::DataLocation);
     QString bookmarkFile = dir + QLatin1String("/bookmarks.xbel");
     if (!writer.write(bookmarkFile, m_bookmarkRootNode))
-        qWarning() << "BookmarkManager: error saving to" << bookmarkFile;
+        qWarning() << "BookmarkManager: error when saving to" << bookmarkFile;
 }
 
 void BookmarksManager::addBookmark(BookmarkNode *parent, BookmarkNode *node, int row)
@@ -268,11 +268,11 @@ void BookmarksManager::exportBookmarks()
 
     XbelWriter writer;
     if (!writer.write(fileName, m_bookmarkRootNode))
-        QMessageBox::critical(0, tr("Export error"), tr("error saving bookmarks"));
+        QMessageBox::critical(0, tr("Export problem"), tr("Unable to save bookmarks"));
 }
 
 RemoveBookmarksCommand::RemoveBookmarksCommand(BookmarksManager *m_bookmarkManagaer, BookmarkNode *parent, int row)
-    : QUndoCommand(BookmarksManager::tr("Remove Bookmark"))
+    : QUndoCommand(BookmarksManager::tr("Remove bookmark"))
     , m_row(row)
     , m_bookmarkManagaer(m_bookmarkManagaer)
     , m_node(parent->children().value(row))
@@ -306,7 +306,7 @@ InsertBookmarksCommand::InsertBookmarksCommand(BookmarksManager *m_bookmarkManag
                 BookmarkNode *parent, BookmarkNode *node, int row)
     : RemoveBookmarksCommand(m_bookmarkManagaer, parent, row)
 {
-    setText(BookmarksManager::tr("Insert Bookmark"));
+    setText(BookmarksManager::tr("Add bookmark"));
     m_node = node;
 }
 
@@ -320,10 +320,10 @@ ChangeBookmarkCommand::ChangeBookmarkCommand(BookmarksManager *m_bookmarkManagae
 {
     if (m_title) {
         m_oldValue = m_node->title;
-        setText(BookmarksManager::tr("Name Change"));
+        setText(BookmarksManager::tr("Change name"));
     } else {
         m_oldValue = m_node->url;
-        setText(BookmarksManager::tr("Address Change"));
+        setText(BookmarksManager::tr("Change address"));
     }
 }
 
@@ -371,7 +371,7 @@ void BookmarksModel::entryAdded(BookmarkNode *item)
     Q_ASSERT(item && item->parent());
     int row = item->parent()->children().indexOf(item);
     BookmarkNode *parent = item->parent();
-    // item was already added so remove beore beginInsertRows is called
+    // item was already added so remove before beginInsertRows is called
     parent->remove(item);
     beginInsertRows(index(parent), row, row);
     parent->add(item, row);
