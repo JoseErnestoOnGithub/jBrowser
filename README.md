@@ -45,6 +45,8 @@ Copyright &copy; 2010-2023 Freepik Company S.L. All rights reserved.
 
 &copy; 2023 IconArchive.com
 
+&copy; 2008-2023 ConvertICO.com, A property of ProIcons.com. All rights reserved.
+
 ## Copyright?
 
 jBrowser is currently ineligible for copyright, meaning that copyright cannot be applied to the browser. This forces me to develop the mod in the Public Domain, with no signs of copyright eligibility.
