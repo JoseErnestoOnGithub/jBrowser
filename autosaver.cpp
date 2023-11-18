@@ -31,6 +31,8 @@
 **
 ****************************************************************************/
 
+/* This file has been modified for use in jBrowser. */
+
 #include "autosaver.h"
 
 #include <QtCore/QDir>
@@ -49,7 +51,7 @@ AutoSaver::AutoSaver(QObject *parent) : QObject(parent)
 AutoSaver::~AutoSaver()
 {
     if (m_timer.isActive())
-        qWarning() << "AutoSaver: still active when destroyed, changes not saved.";
+        qWarning() << "AutoSaver: Still active when destroyed. Changes weren't saved.";
 }
 
 void AutoSaver::changeOccurred()
@@ -80,7 +82,7 @@ void AutoSaver::saveIfNeccessary()
     m_timer.stop();
     m_firstChange = QTime();
     if (!QMetaObject::invokeMethod(parent(), "save", Qt::DirectConnection)) {
-        qWarning() << "AutoSaver: error invoking slot save() on parent";
+        qWarning() << "AutoSaver: unable to invoke slot save() on parent";
     }
 }
 
