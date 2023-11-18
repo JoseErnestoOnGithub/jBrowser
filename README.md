@@ -8,11 +8,11 @@ jBrowser
 jBrowser is a mod of Split Browser that is a minimalistic, ultra-lightweight and open-source web browser for desktop, based on [WebKit](https://webkit.org/) (provided by [Playwright](https://playwright.dev/)), [Ultralight](https://ultralig.ht/) and a native [webview](https://webview.dev/) (WebKit on macOS, WebKitGTK on Linux, Microsoft Edge WebView2 on Windows), with split screen functionality. It was originally made with [Qt](https://www.qt.io/), but now it uses Qt (browser), Python (launcher) and HTML, CSS, JavaScript (documentation).
 
 
-Every variant of jBrowser (WebKit, Ultralight, native webview) uses <100 MB of RAM to show the home page, which is much less than Chrome/Firefox/Vivaldi/Opera/Edge. It also allows you to show web pages side-by-side as tiles by dragging and dropping tabs.
+Every variant of jBrowser (WebKit, Ultralight and native WebView) uses less than 100 MB (it will increase to 1 GB significantly, if many tabs are open) of RAM to show the homepage, which is much less than Chrome, Firefox, Edge, etc. This causes the browser to run as fast as possible. My PC currently has 8 GB of RAM. Also, jBrowser allows you to show webpages side-by-side as tiles by dragging &amp; dropping tabs.
 
 See the RAM usage of all 3 variants showing the DuckDuckGo home page:
 
-![Split Browser RAM usage](https://i.imgur.com/LbHUr1N.png)
+![Original Split Browser RAM usage](https://i.imgur.com/LbHUr1N.png)
 
 Currently, jBrowser is in the alpha stage. Other features like bookmarks, history, extensions, adblock and advanced settings are not implemented.
 
