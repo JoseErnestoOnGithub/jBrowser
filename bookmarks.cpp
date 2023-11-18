@@ -31,6 +31,8 @@
 **
 ****************************************************************************/
 
+/* This file has been modified for use in jBrowser. */
+
 #include "bookmarks.h"
 #include "mainwindow.h"
 #include "autosaver.h"
