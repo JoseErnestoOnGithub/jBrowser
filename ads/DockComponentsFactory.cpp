@@ -66,7 +66,7 @@ void CDockComponentsFactory::resetDefaultFactory()
 {
 	DefaultFactory.reset(new CDockComponentsFactory());
 }
-} // Namespace ads
+} // namespace ads
 
 //---------------------------------------------------------------------------
 // EOF DockComponentsFactory.cpp
